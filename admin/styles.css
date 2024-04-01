@@ -1,0 +1,28 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('../img/fondo.jpg');
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+    margin: 0;
+    height: 100%;
+    color: white;
+    padding: 3%;
+}
+
+.columnas {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.columna {
+    flex-basis: 48%;
+}
+
+.formulario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+    /* Para centrarlo verticalmente también */
+}

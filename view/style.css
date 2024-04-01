@@ -1,0 +1,119 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('../img/fondo.jpg');
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+    margin: 0;
+    height: 100%;
+}
+
+img {
+    height: 400px;
+    width: 250px;
+    object-fit: cover;
+    padding: 30px;
+}
+
+.top5 {
+    columns: 5 10em;
+    float: left;
+    text-align: center;
+    /* border: solid 1px black; */
+    width: 95.92%;
+}
+
+.pelis {
+    columns: 1 1em;
+    float: left;
+    text-align: justify;
+    align-items: center;
+    justify-content: center;
+    margin: 1%;
+}
+
+.zoom {
+    transition: transform .2s;
+}
+
+.Filtrar {
+    display: flex;
+    margin: 5%;
+    margin-bottom: 1px;
+    margin-top: 1%;
+    border: solid 1px black;
+    color: #fff;
+}
+
+.zoom:hover {
+    transform: scale(1.2);
+    /* content: url('./portadas/Blade_Runner.jpg'); */
+}
+
+.contenedortop5 p {
+    text-align: center;
+    color: #fff;
+}
+
+.contenedorpelis {
+    padding-left: 5%;
+}
+
+.infopeli {
+    position: absolute;
+    display: none;
+    width: 50%;
+    height: 75%;
+    background-color: #ccc;
+    margin-left: 24%;
+}
+
+.imagen {
+    order: 2;
+    margin-left: auto;
+}
+
+.titulo {
+    order: 1;
+    margin: 14px;
+    margin-right: auto;
+    text-align: center;
+}
+
+.texto {
+    order: 1;
+    margin: 20px;
+    margin-right: auto;
+    text-align: justify;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.pelis p {
+    color: white;
+    text-align: center;
+}
+
+.buscar {
+    /* display: flex; */
+    float: left;
+    color: white;
+    margin: 1%;
+    /* padding-bottom: 10%; */
+    /* margin-bottom: 10%; */
+    padding: 1%;
+    width: 90%;
+}
+
+.buscar button {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.peticiones {
+    background-color: white;
+}

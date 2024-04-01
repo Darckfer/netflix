@@ -1,0 +1,48 @@
+/* style/style.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('../img/fondo.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    color: #fff;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 50%;
+    padding: 12px;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
+
+.centrar_item {
+    text-align: center;
+}
+
+button:hover {
+    background-color: darkred;
+}
+
+.error {
+    color: red;
+    text-align: center;
+}
