@@ -1,10 +1,22 @@
 <?php
+include_once('conexion.php');
 
-require_once "./conexion.php";
+if (!empty($_POST['busqueda']) || !empty($_POST['genero'])) {
+    $nombre =  $_POST['busqueda'];
+    $genero =  $_POST['genero'];
+    if ($genero != '') {
+        $consulta = $pdo->prepare("SELECT * FROM tbl_contenido WHERE titulo LIKE :nombre AND genero LIKE :genero");
+        $consulta->bindValue(':nombre', '%' . $nombre . '%', PDO::PARAM_STR);
+        $consulta->bindValue(':genero', '%' . $genero . '%', PDO::PARAM_STR);
+    } else {
+        $consulta = $pdo->prepare("SELECT * FROM tbl_contenido WHERE titulo LIKE :nombre");
+        $consulta->bindValue(':nombre', '%' . $nombre . '%', PDO::PARAM_STR);
+    }
+} else {
+    $consulta = $pdo->prepare("SELECT * FROM tbl_contenido");
+}
 
-$consulta = $pdo->prepare("SELECT *  FROM tbl_contenido c INNER JOIN tbl_genero g ON c.genero=g.id_gen order by c.id_cont asc;");
 $consulta->execute();
-
 $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
 
 echo json_encode($resultado);

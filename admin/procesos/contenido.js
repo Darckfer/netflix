@@ -10,11 +10,11 @@ function peticiones() {
     var ajax = new XMLHttpRequest();
 
     ajax.open('POST', './procesos/peticiones.php');
-    ajax.onload = function() {
+    ajax.onload = function () {
         if (ajax.status === 200) {
             var json = JSON.parse(ajax.responseText);
             var tabla = '';
-            json.forEach(function(item) {
+            json.forEach(function (item) {
                 var str = "<tr>";
                 str += "<td>" + item.id_user + "</td>";
                 str += "<td>" + item.nom + "</td>";
@@ -53,7 +53,7 @@ function aceptar(id_user, nom) {
             formdata.append('id', id_user);
             var ajax = new XMLHttpRequest();
             ajax.open('POST', './procesos/aceptar.php');
-            ajax.onload = function() {
+            ajax.onload = function () {
                 if (ajax.status === 200) {
                     if (ajax.responseText == "ok") {
                         peticiones('');
@@ -92,7 +92,7 @@ function eliminar(id_user, nom) {
             formdata.append('id', id_user);
             var ajax = new XMLHttpRequest();
             ajax.open('POST', 'eliminar.php');
-            ajax.onload = function() {
+            ajax.onload = function () {
                 if (ajax.status === 200) {
                     if (ajax.responseText == "ok") {
                         peticiones('');
@@ -139,11 +139,11 @@ function usuarios() {
     var ajax = new XMLHttpRequest();
 
     ajax.open('POST', './procesos/usuarios.php');
-    ajax.onload = function() {
+    ajax.onload = function () {
         if (ajax.status === 200) {
             var json = JSON.parse(ajax.responseText);
             var tabla = '';
-            json.forEach(function(item) {
+            json.forEach(function (item) {
                 var str = "<tr>";
                 str += "<td>" + item.id_user + "</td>";
                 str += "<td>" + item.nom + "</td>";
@@ -173,7 +173,7 @@ function Editar(id_user) {
     formdata.append('id', id_user);
     var ajax = new XMLHttpRequest();
     ajax.open('POST', './procesos/editarusu.php');
-    ajax.onload = function() {
+    ajax.onload = function () {
         if (ajax.status === 200) {
             var json = JSON.parse(ajax.responseText);
             console.log(json.id_user);
@@ -198,7 +198,7 @@ editarusu.addEventListener("click", () => {
     var formdata = new FormData(form);
     var ajax = new XMLHttpRequest();
     ajax.open('POST', './procesos/updateusu.php');
-    ajax.onload = function() {
+    ajax.onload = function () {
         if (ajax.status === 200) {
             if (ajax.responseText === "ok") {
                 Swal.fire({
@@ -234,26 +234,53 @@ editarusu.addEventListener("click", () => {
 
 
 
+// |----------------------|
+// | Filtros de búsqueda  |
+// |----------------------|
 
+const buscar = document.getElementById("buscar");
+const buscar2 = document.getElementById("genero");
+
+buscar.addEventListener("input", () => {
+    const valor = buscar.value;
+    const valor2 = buscar2.value;
+    actualizarPeliculas(valor, valor2);
+});
+
+buscar2.addEventListener("change", () => {
+    const valor = buscar.value;
+    const valor2 = buscar2.value;
+    actualizarPeliculas(valor, valor2);
+});
+
+function actualizarPeliculas(valor, valor2) {
+    if (valor === "") {
+        peliculas("", valor2);
+    } else {
+        peliculas(valor, valor2);
+    }
+}
 
 // |-----------------------|
 // |   Mostrar peliculas   |
 // |-----------------------|
 
-peliculas('');
+peliculas("", "");
 
-function peliculas() {
+function peliculas(valor, valor2) {
     var peticiones = document.getElementById('peliculas');
-    var formdata = new FormData();
-    var ajax = new XMLHttpRequest();
+    const formdata = new FormData();
+    formdata.append("busqueda", valor);
+    formdata.append("genero", valor2);
+    const ajax = new XMLHttpRequest();
 
     ajax.open('POST', './procesos/peliculas.php');
-    ajax.onload = function() {
+    ajax.onload = function () {
         if (ajax.status === 200) {
             var json = JSON.parse(ajax.responseText);
             var tabla = '';
 
-            json.forEach(function(item) {
+            json.forEach(function (item) {
                 var str = "<tr>";
                 str += "<td>" + item.id_cont + "</td>";
                 str += "<td>" + item.titulo + "</td>";
@@ -285,7 +312,7 @@ function Editarvideo(id_cont) {
     formdata.append('id', id_cont);
     var ajax = new XMLHttpRequest();
     ajax.open('POST', './procesos/editarcont.php');
-    ajax.onload = function() {
+    ajax.onload = function () {
         if (ajax.status === 200) {
             var json = JSON.parse(ajax.responseText);
             // console.log(json.id_cont);
@@ -312,7 +339,7 @@ editarpeli.addEventListener("click", () => {
     var formdata = new FormData(form);
     var ajax = new XMLHttpRequest();
     ajax.open('POST', './procesos/updatepeli.php');
-    ajax.onload = function() {
+    ajax.onload = function () {
         if (ajax.status === 200) {
             if (ajax.responseText === "ok") {
                 Swal.fire({
@@ -373,7 +400,7 @@ function eliminarvideo(id_cont, titulo) {
             formdata.append('id', id_cont);
             var ajax = new XMLHttpRequest();
             ajax.open('POST', './procesos/eliminarvideo.php');
-            ajax.onload = function() {
+            ajax.onload = function () {
                 if (ajax.status === 200) {
                     if (ajax.responseText == "ok") {
                         peticiones('');

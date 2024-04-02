@@ -3,8 +3,10 @@ session_start();
 if (!isset($_SESSION['id_user'])) {
     header('Location: ../index.php');
 }
+if ($_SESSION['rol'] == 2) {
+    header('Location: ../view/index.php');
+}
 include('./procesos/conexion.php');
-
 ?>
 
 <!DOCTYPE html>
@@ -13,14 +15,14 @@ include('./procesos/conexion.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peliculas</title>
+    <title>Admin</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-
-    <a href="./salir.php"><button type="button" class="btn btn-danger">Salir</button></a>
+    <h3>Bienvenido: <?php echo $_SESSION['nom']; ?></h3>
+    <a href="./procesos/salir.php"><button type="button" class="btn btn-danger">Salir</button></a>
     <div class="columnas">
         <div class="columna">
             <h1>Peticiones aceptar usuarios</h1>
@@ -91,10 +93,6 @@ include('./procesos/conexion.php');
             </div>
         </div>
 
-        <!-- <div class="columnas">
-
-        </div> -->
-
         <div class="columna">
             <div class="formulario">
                 <form action="" method="post" id="frmpeli">
@@ -124,6 +122,22 @@ include('./procesos/conexion.php');
                     <p><input type="button" id="editarpeli" value="registrar" class="btn btn-primary"></p>
                 </form>
             </div>
+        </div>
+    </div>
+
+    <div class="buscar">
+        <div class="form-group">
+            <label for="buscar">Buscar:</label>
+            <input type="text" name="buscar" id="buscar" placeholder="Buscar..." class="form-control">
+            <label for="genero">Género: </label>
+            <select name="genero" id="genero">
+                <option value="">Todos</option>
+                <?php
+                foreach ($generos as $genero) {
+                    echo '<option value="' . $genero['id_gen'] . '">' . $genero['nom_gen'] . '</option>';
+                }
+                ?>
+            </select>
         </div>
     </div>
 

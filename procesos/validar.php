@@ -19,11 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit();
             } elseif ($resultado['rol'] == '1') {
                 $_SESSION['id_user'] = $resultado['id_user'];
+                $_SESSION['rol'] = $resultado['rol'];
+                $_SESSION['nom'] = $resultado['nom'];
                 header('Location: ../admin/');
                 $pdo = null;
                 exit();
             } else {
                 $_SESSION['id_user'] = $resultado['id_user'];
+                $_SESSION['rol'] = $resultado['rol'];
+                $_SESSION['nom'] = $resultado['nom'];
                 header('Location: ../view');
                 $pdo = null;
                 exit();
@@ -59,14 +63,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: ../register.php');
             exit();
         } else {
-            $rol = 2; 
+            $rol = 2;
             $activo = 0;
             // Insertar nuevo usuario en la base de datos
             $consulta = $pdo->prepare("INSERT INTO tbl_users (nom, email, pwd, rol, activo) VALUES (:nom, :email, :pwd, :rol, :activo)");
             $consulta->bindParam(":nom", $nom, PDO::PARAM_STR);
             $consulta->bindParam(":email", $email, PDO::PARAM_STR);
             $consulta->bindParam(":pwd", $pwdencrip, PDO::PARAM_STR);
-            $consulta->bindParam(":rol", $rol, PDO::PARAM_INT); 
+            $consulta->bindParam(":rol", $rol, PDO::PARAM_INT);
             $consulta->bindParam(":activo", $activo, PDO::PARAM_INT);
             $consulta->execute();
 
